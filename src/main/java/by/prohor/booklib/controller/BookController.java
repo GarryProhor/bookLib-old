@@ -3,14 +3,18 @@ package by.prohor.booklib.controller;
 
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.service.impl.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("web")
 public class BookController {
-    BookService bookService = new BookService();
+
+    @Autowired
+    private BookService bookService;
 
     @RequestMapping(value = "api", method = RequestMethod.GET)
     public List<Book> list(){
@@ -18,7 +22,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "api", method = RequestMethod.POST)
-    public Book create(@RequestBody Book book){
+    public Book create(@Valid @RequestBody Book book){
         return bookService.create(book);
     }
     
@@ -33,7 +37,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "api/{id}", method = RequestMethod.PUT)
-    public Book update(@PathVariable int id, @RequestBody Book book){
+    public Book update(@PathVariable int id,@Valid @RequestBody Book book){
         return bookService.update(id, book);
     }
 
