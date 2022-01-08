@@ -17,9 +17,9 @@ public class BookService implements LIbrService<Book> {
 
     private static int index = 2;
     static {
-        Book book1 = new Book(1, "888-88-888-8", "GarryPotter", "G.Rolling", 500, 0.96, 15.15);
+        Book book1 = new Book(1, "ISBN 978-5-55555-333-1", "GarryPotter", "G.Rolling", 500, 0.96, 15.15);
         books.put(1, book1);
-        Book book2 = new Book(2, "777-77-777-7", "StarWars", "G.Lucas", 1000, 1.66, 29.99);
+        Book book2 = new Book(2, "ISBN 978-3-77777-2-5", "StarWars", "G.Lucas", 1000, 1.66, 29.99);
         books.put(2, book2);
     }
 

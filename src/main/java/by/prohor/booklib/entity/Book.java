@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class Book {
     private int id;
 
+    @Pattern(regexp = "^[ISBN]{4} [978]{3}[-]{1}[\\d]{1}[-]{1}[\\d]{5}[-]{1}[\\d]{3}[-]{1}[\\d]{1}$")
     private String isbn;
 
     @NotBlank(message = "should not be empty")
@@ -29,6 +30,7 @@ public class Book {
     // ^[0-9]*[.,][0-9]+$
     // ^\d+(?:[.,]\d{2})?$
     //@Pattern(regexp = "^[0-9]*[.,][0-9]+$", message = "шляпа полная")
+    @DecimalMin(value = "0.0", message = "invalid number. enter a positive number")
     @Digits(integer = 4, fraction = 2)
     private BigDecimal price;
 
