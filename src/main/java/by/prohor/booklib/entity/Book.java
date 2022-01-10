@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 public class Book {
+    @NotNull
     private int id;
 
     @Pattern(regexp = "^[ISBN]{4} [978]{3}[-]{1}[\\d]{1}[-]{1}[\\d]{5}[-]{1}[\\d]{3}[-]{1}[\\d]{1}$")
@@ -24,13 +25,10 @@ public class Book {
     @Max(1000)
     private int page;
 
-    @Min(0)
+    @PositiveOrZero
     private double weight;
 
-    // ^[0-9]*[.,][0-9]+$
-    // ^\d+(?:[.,]\d{2})?$
-    //@Pattern(regexp = "^[0-9]*[.,][0-9]+$", message = "шляпа полная")
-    @DecimalMin(value = "0.0", message = "invalid number. enter a positive number")
+    @Positive
     @Digits(integer = 4, fraction = 2)
     private BigDecimal price;
 

@@ -2,12 +2,9 @@ package by.prohor.booklib.controller;
 
 
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.exception.BookIncorrectData;
 import by.prohor.booklib.exception.NoSuchBookException;
 import by.prohor.booklib.service.impl.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,15 +14,18 @@ import java.util.List;
 @RequestMapping("web")
 public class BookController {
 
-    @Autowired
-    private BookService bookService;
+    private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping("api")
     public List<Book> list(){
         return bookService.list();
     }
 
-    @PostMapping("api")
+    @RequestMapping(value = "api", method = RequestMethod.POST)
     public Book create(@Valid @RequestBody Book book){
         return bookService.create(book);
     }

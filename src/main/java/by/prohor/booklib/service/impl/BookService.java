@@ -3,6 +3,7 @@ package by.prohor.booklib.service.impl;
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.service.LIbrService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Component
 public class BookService implements LIbrService<Book> {
 
     private static Map<Integer, Book> books = new HashMap<>();
@@ -26,7 +27,8 @@ public class BookService implements LIbrService<Book> {
 
     @Override
     public List<Book> list() {
-        return new ArrayList<>(books.values());
+
+       return new ArrayList<>(books.values());
     }
 
     @Override
