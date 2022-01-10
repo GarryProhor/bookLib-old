@@ -25,7 +25,7 @@ public class BookController {
         return bookService.list();
     }
 
-    @RequestMapping(value = "api", method = RequestMethod.POST)
+    @PostMapping("api")
     public Book create(@Valid @RequestBody Book book){
         return bookService.create(book);
     }
