@@ -3,8 +3,7 @@ package by.prohor.booklib.controller;
 
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.exception.NoSuchBookException;
-import by.prohor.booklib.service.impl.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+import by.prohor.booklib.dao.impl.BookDAO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,9 +13,9 @@ import java.util.List;
 @RequestMapping("web")
 public class BookController {
 
-    private final BookService bookService;
+    private final BookDAO bookService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookDAO bookService) {
         this.bookService = bookService;
     }
 
@@ -27,7 +26,8 @@ public class BookController {
 
     @PostMapping("api")
     public Book create(@Valid @RequestBody Book book){
-        return bookService.create(book);
+        return null;
+        //return bookService.create(book);
     }
 
     @GetMapping("api/{id}")
