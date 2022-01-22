@@ -8,8 +8,9 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
+@JsonDeserialize(using = BookDeserializer.class)
+public class BookEntity {
 
-public class Book {
     @NotNull
     private int id;
 
@@ -35,25 +36,23 @@ public class Book {
     @Digits(integer = 4, fraction = 2)
     private BigDecimal price;
 
-    public Book() {
+    public BookEntity(int id, String isbn, String name, String author, int page, double weight, double price) {
+        this.id = id;
+        this.isbn = isbn;
+        this.name = name;
+        this.author = author;
+        this.page = page;
+        this.weight = weight;
+        this.price = BigDecimal.valueOf(price);
+    }
+    public BookEntity( String isbn, String name, String author, int page, double weight, double price) {
+
+        this.isbn = isbn;
+        this.name = name;
+        this.author = author;
+        this.page = page;
+        this.weight = weight;
+        this.price = BigDecimal.valueOf(price);
     }
 
-    public Book(int id, String isbn, String name, String author, int page, double weight, double price) {
-        this.id = id;
-        this.isbn = isbn;
-        this.name = name;
-        this.author = author;
-        this.page = page;
-        this.weight = weight;
-        this.price = BigDecimal.valueOf(price);
-    }
-    public Book(String isbn, String name, String author, int page, double weight, double price) {
-        this.id = id;
-        this.isbn = isbn;
-        this.name = name;
-        this.author = author;
-        this.page = page;
-        this.weight = weight;
-        this.price = BigDecimal.valueOf(price);
-    }
 }

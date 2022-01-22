@@ -1,20 +1,21 @@
 package by.prohor.booklib.db;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+@Component
 public class DBConnection {
-    private final String HOST = "localhost";
-    private final String PORT = "8080";
-    private final String DB_NAME = "Library_DB";
+
+    private final String CONNECTION = "jdbc:h2:~/test";
     private final String LOGIN = "root";
-    private final String PASSWORD = "root";
+    private final String PASSWORD = "";
 
     private Connection dbConnection = null;
 
     public Connection getDbConnection() throws SQLException {
-        String connection = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
-        return dbConnection = DriverManager.getConnection(connection, LOGIN, PASSWORD);
+
+        return dbConnection = DriverManager.getConnection(CONNECTION, LOGIN, PASSWORD);
     }
 }

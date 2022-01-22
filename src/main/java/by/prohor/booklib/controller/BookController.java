@@ -13,26 +13,25 @@ import java.util.List;
 @RequestMapping("web")
 public class BookController {
 
-    private final BookDAO bookService;
+    private final BookDAO bookDAO;
 
-    public BookController(BookDAO bookService) {
-        this.bookService = bookService;
+    public BookController(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
 
     @GetMapping("api")
     public List<Book> list(){
-        return bookService.list();
+        return bookDAO.list();
     }
 
     @PostMapping("api")
-    public Book create(@Valid @RequestBody Book book){
-        return null;
-        //return bookService.create(book);
+    public int create(@Valid @RequestBody Book book){
+        return bookDAO.create(book);
     }
 
     @GetMapping("api/{id}")
     public Book get(@PathVariable int id){
-        Book book = bookService.get(id);
+        Book book = bookDAO.get(id);
 
         if(book==null){
             throw new NoSuchBookException("There is no book with ID = " +
@@ -43,12 +42,12 @@ public class BookController {
 
     @DeleteMapping("api/{id}")
     public Book delete(@PathVariable int id){
-        return bookService.delete(id);
+        return bookDAO.delete(id);
     }
 
     @PutMapping("api/{id}")
     public Book update(@PathVariable int id,@Valid @RequestBody Book book){
-        return bookService.update(id, book);
+        return bookDAO.update(id, book);
     }
 
 

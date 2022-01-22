@@ -1,5 +1,6 @@
 package by.prohor.booklib.dao;
 
+import by.prohor.booklib.entity.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,6 @@ public interface LIbrCRUD<K> {
 
     K update(int id, K k);
 
-    K delete(int id);
+    Book delete(int id);
 
 }
