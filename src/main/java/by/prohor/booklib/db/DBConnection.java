@@ -7,15 +7,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 @Component
 public class DBConnection {
-
-    private final String CONNECTION = "jdbc:h2:~/test";
-    private final String LOGIN = "root";
-    private final String PASSWORD = "";
-
     private Connection dbConnection = null;
-
     public Connection getDbConnection() throws SQLException {
+        try{
+            if(dbConnection==null){
+                Class.forName("org.h2.Driver");
+                dbConnection = DriverManager.getConnection("jdbc:h2:~/test", "root", "");
+            }
 
-        return dbConnection = DriverManager.getConnection(CONNECTION, LOGIN, PASSWORD);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return dbConnection;
     }
 }

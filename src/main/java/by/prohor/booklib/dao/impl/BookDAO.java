@@ -5,6 +5,7 @@ import by.prohor.booklib.db.DBConnection;
 import by.prohor.booklib.entity.Book;
 import org.springframework.stereotype.Component;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,10 @@ public class BookDAO implements BookCRUD<Book> {
         ResultSet resultSet = null;
         Book book = new Book();
         String query = "SELECT * FROM book WHERE id = ?";
-        try(PreparedStatement pst = dbConnection.getDbConnection().prepareStatement(query)) {
+        try(Connection connection = dbConnection.getDbConnection();
+        PreparedStatement pst = connection.prepareStatement(query)) {
+
+          //  PreparedStatement pst = dbConnection.getDbConnection().prepareStatement(query);
             pst.setInt(1, id);
             resultSet = pst.executeQuery();
             if(resultSet.next()){
@@ -86,7 +90,7 @@ public class BookDAO implements BookCRUD<Book> {
     @Override
     public int create(Book book) {
         try{
-            String query = "INSERT INTO book (isbn, name, author, page, weight, price) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO book (isbn, name, author, page, weight, price) VALUES (?, ?, ?, ?, ?, ?);";
             PreparedStatement pst = dbConnection.getDbConnection().prepareStatement(query);
             pst.setString(1, book.getIsbn());
             pst.setString(2, book.getName());
