@@ -3,12 +3,13 @@ package by.prohor.booklib.entity;
 import by.prohor.booklib.util.BookDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
-
+@EntityScan
 public class Book {
     @NotNull
     private int id;
@@ -48,12 +49,21 @@ public class Book {
         this.price = BigDecimal.valueOf(price);
     }
     public Book(String isbn, String name, String author, int page, double weight, double price) {
-        this.id = id;
+
         this.isbn = isbn;
         this.name = name;
         this.author = author;
         this.page = page;
         this.weight = weight;
         this.price = BigDecimal.valueOf(price);
+    }
+
+    public Book(String isbn, String name, String author, int page, double weight, BigDecimal price) {
+        this.isbn = isbn;
+        this.name = name;
+        this.author = author;
+        this.page = page;
+        this.weight = weight;
+        this.price = price;
     }
 }
