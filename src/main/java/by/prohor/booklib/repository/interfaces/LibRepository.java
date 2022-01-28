@@ -1,4 +1,4 @@
-package by.prohor.booklib.repository;
+package by.prohor.booklib.repository.interfaces;
 
 import java.util.List;
 

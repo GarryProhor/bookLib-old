@@ -12,21 +12,17 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import java.io.IOException;
 
 
-public class BookDeserializer extends StdDeserializer<BookEntity> {
+public class BookDeserializer extends StdDeserializer<Book> {
+    protected BookDeserializer() {
+        this (null);
+    }
+
     protected BookDeserializer(Class<?> vc) {
         super(vc);
     }
 
-    protected BookDeserializer(JavaType valueType) {
-        super(valueType);
-    }
-
-    protected BookDeserializer(StdDeserializer<?> src) {
-        super(src);
-    }
-
     @Override
-    public BookEntity deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+    public Book deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
 
         String isbn = node.get("isbn").asText();
@@ -35,6 +31,6 @@ public class BookDeserializer extends StdDeserializer<BookEntity> {
         int page = node.get("page").asInt();
         double weight = node.get("weight").asDouble();
         double price = node.get("price").asDouble();
-        return new BookEntity(isbn, name, author, page, weight, price);
+        return new Book(isbn, name, author, page, weight, price);
     }
 }

@@ -6,9 +6,9 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.function.Function;
 
 @Data
-@JsonDeserialize(using = BookDeserializer.class)
 public class BookEntity {
 
     @NotNull
@@ -55,4 +55,16 @@ public class BookEntity {
         this.price = BigDecimal.valueOf(price);
     }
 
+    public BookEntity() {
+
+    }
+
+    public BookEntity(String isbn, String name, String author, int page, double weight, BigDecimal price) {
+        this.isbn = isbn;
+        this.name = name;
+        this.author = author;
+        this.page = page;
+        this.weight = weight;
+        this.price = price;
+    }
 }

@@ -2,7 +2,10 @@ package by.prohor.booklib.controller;
 
 
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.repository.BookRepository;
+import by.prohor.booklib.entity.BookEntity;
+import by.prohor.booklib.repository.implementation.BookRepository;
+import by.prohor.booklib.services.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,41 +20,32 @@ import java.util.List;
 @RequestMapping("web")
 public class BookController {
 
-    final
-    BookRepository bookRepository;
+    private final BookService bookService;
 
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
+
     @GetMapping("api")
-    public ResponseEntity<List<Book>> getAllBooks(@RequestParam(required = false) String name){
-        List<Book> books = new ArrayList<>();
-        if(name==null){
-            bookRepository.findAll().forEach(books::add);
-        }
-        return new ResponseEntity<>(books, HttpStatus.OK);
+    public ResponseEntity<Object> getAllBooks(){
+        return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
     }
 
     @GetMapping("api/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable("id") Long id){
-        Book book = bookRepository.findById(id);
-        if(book!=null){
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Object> getBookById(@PathVariable("id") Long id){
+            return new ResponseEntity<>(bookService.findByIdBook(id), HttpStatus.OK);
     }
 
     @PostMapping("api")
     public ResponseEntity<String> createBook(@Valid @RequestBody Book b){
-        bookRepository.create(new Book(b.getIsbn(), b.getName(), b.getAuthor(), b.getPage(), b.getWeight(), b.getPrice()));
+        bookService.saveBook(new Book(b.getIsbn(), b.getName(), b.getAuthor(), b.getPage(), b.getWeight(), b.getPrice()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("api/{id}")
     public ResponseEntity<String> updateBook(@PathVariable("id") Long id, @Valid @RequestBody Book b){
-        Book book = bookRepository.findById(id);
+        Book book = bookService.findByIdBook(id);
 
         if(book != null){
             book.setId(Math.toIntExact(id));
@@ -62,7 +56,7 @@ public class BookController {
             book.setWeight(b.getWeight());
             book.setPrice(b.getPrice());
 
-            bookRepository.update(book);
+            bookService.updateBook(book);
             return new ResponseEntity<>(HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -71,13 +65,13 @@ public class BookController {
 
     @DeleteMapping("api/{id}")
     public ResponseEntity<String> deleteBookById(@PathVariable("id") Long id){
-        bookRepository.deleteById(id);
+        bookService.deleteBook(id);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("api")
     public ResponseEntity<String> deleteAllBook(){
-        bookRepository.deleteAll();
+        bookService.deleteAllBooks();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
-@EntityScan
+@JsonDeserialize(using = BookDeserializer.class)
 public class Book {
     @NotNull
     private int id;

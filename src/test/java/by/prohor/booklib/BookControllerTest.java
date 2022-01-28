@@ -3,7 +3,7 @@ package by.prohor.booklib;
 
 import by.prohor.booklib.controller.BookController;
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.repository.BookRepository;
+import by.prohor.booklib.repository.implementation.BookRepository;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
