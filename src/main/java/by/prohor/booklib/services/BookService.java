@@ -30,14 +30,16 @@ public class BookService {
         return book;
     }
 
-    public void saveBook(Book book){
+    public Book saveBook(Book book){
         BookEntity bookEntity = BookMapper.dtoIntoEntity(book);
         bookRepository.create(bookEntity);
+        return book;
     }
 
-    public void updateBook(Book book){
+    public BookEntity updateBook(Book book){
         BookEntity bookEntity = BookMapper.dtoIntoEntity(book);
         bookRepository.update(bookEntity);
+        return bookEntity;
     }
 
     public void deleteBook(Long id){

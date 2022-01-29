@@ -38,13 +38,13 @@ public class BookController {
     }
 
     @PostMapping("api")
-    public ResponseEntity<String> createBook(@Valid @RequestBody Book b){
-        bookService.saveBook(new Book(b.getIsbn(), b.getName(), b.getAuthor(), b.getPage(), b.getWeight(), b.getPrice()));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<Object> createBook(@Valid @RequestBody Book b){
+        return new ResponseEntity<>(bookService.saveBook(new Book(b.getIsbn(), b.getName(),
+                b.getAuthor(), b.getPage(), b.getWeight(), b.getPrice())), HttpStatus.CREATED);
     }
 
     @PutMapping("api/{id}")
-    public ResponseEntity<String> updateBook(@PathVariable("id") Long id, @Valid @RequestBody Book b){
+    public ResponseEntity<Object> updateBook(@PathVariable("id") Long id, @Valid @RequestBody Book b){
         Book book = bookService.findByIdBook(id);
 
         if(book != null){
@@ -56,8 +56,7 @@ public class BookController {
             book.setWeight(b.getWeight());
             book.setPrice(b.getPrice());
 
-            bookService.updateBook(book);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(bookService.updateBook(book), HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
