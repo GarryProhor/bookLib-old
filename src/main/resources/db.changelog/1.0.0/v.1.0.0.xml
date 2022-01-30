@@ -6,9 +6,4 @@
 
     <include file="1.0.0-create-book.xml" relativeToChangelogFile="true"/>
 
-    <changeSet id="before insert" author="GP">
-        <tagDatabase tag="before insert"/>
-    </changeSet>
-
-    <include file="1.0.0-insert-book.xml" relativeToChangelogFile="true"/>
-</databaseChangeLog>
+ </databaseChangeLog>
