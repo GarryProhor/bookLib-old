@@ -6,7 +6,7 @@
       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
 
 
-<changeSet id="create" author="GP">
+    <changeSet id="create" author="GP">
         <createTable tableName="book">
             <column name="id" autoIncrement="true" type="int">
                 <constraints primaryKey="true"/>
@@ -35,20 +35,19 @@
         </insert>
 
     </changeSet>
+    <!--    <changeSet id="insert" author="GP">-->
+    <!--        <sql>-->
+    <!--            INSERT INTO book (isbn, name, author, page, weight, price)-->
+    <!--            VALUES('ISBN 978-1-55111-123-9', 'Star Wars', 'G.Lucas', 800, 0.9, 179.99);-->
 
-<!--    <changeSet id="insert" author="GP">-->
-<!--        <sql>-->
-<!--            INSERT INTO book (isbn, name, author, page, weight, price)-->
-<!--            VALUES('ISBN 978-1-55111-123-9', 'Star Wars', 'G.Lucas', 800, 0.9, 179.99);-->
+    <!--            INSERT INTO book (isbn, name, author, page, weight, price)-->
+    <!--            VALUES('ISBN 978-1-55111-123-9', 'Garry Potter', 'G.Rouling', 700, 0.78, 99.98);-->
+    <!--        </sql>-->
 
-<!--            INSERT INTO book (isbn, name, author, page, weight, price)-->
-<!--            VALUES('ISBN 978-1-55111-123-9', 'Garry Potter', 'G.Rouling', 700, 0.78, 99.98);-->
-<!--        </sql>-->
+    <!--        <rollback>-->
+    <!--            <sql>DELETE FROM book</sql>-->
+    <!--        </rollback>-->
 
-<!--        <rollback>-->
-<!--            <sql>DELETE FROM book</sql>-->
-<!--        </rollback>-->
-
-<!--    </changeSet>-->
+    <!--    </changeSet>-->
 
 </databaseChangeLog>
