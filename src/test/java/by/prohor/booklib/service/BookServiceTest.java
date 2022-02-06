@@ -3,24 +3,23 @@ package by.prohor.booklib.service;
 
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.entity.BookEntity;
+import by.prohor.booklib.mappers.book.BookMapper;
+import by.prohor.booklib.mappers.book.BookMapperImpl;
 import by.prohor.booklib.repository.implementation.BookRepository;
-import by.prohor.booklib.services.BookMapper;
 import by.prohor.booklib.services.BookService;
 import by.prohor.booklib.stub.BookStub;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -35,6 +34,9 @@ public class BookServiceTest {
 
     @InjectMocks
     BookService bookService;
+
+    @InjectMocks
+    private BookMapperImpl mapper;
 
     @Test
     @Order(1)
@@ -68,7 +70,7 @@ public class BookServiceTest {
     public void test_updateBook(){
         BookEntity book = BookStub.buildBook();
         when(bookRepository.update(book)).thenReturn(book.getId());
-        assertEquals(book, bookService.updateBook(BookMapper.entityIntoDTO(book)));
+        assertEquals(book, bookService.updateBook(mapper.bookEntityToBook(book)));
     }
 
     @Test

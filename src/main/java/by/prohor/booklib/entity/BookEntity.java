@@ -3,18 +3,20 @@ package by.prohor.booklib.entity;
 import by.prohor.booklib.util.BookDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.function.Function;
 
-@Data
+
 public class BookEntity {
 
     @NotNull
     private int id;
 
-    @Pattern(regexp = "^[ISBN]{4} [978]{3}[-]{1}[\\d]{1}[-]{1}[\\d]{5}[-]{1}[\\d]{3}[-]{1}[\\d]{1}$")
+    @Pattern(regexp = "[0-9]{13}")
     private String isbn;
 
     @NotBlank(message = "should not be empty")
@@ -65,6 +67,62 @@ public class BookEntity {
         this.author = author;
         this.page = page;
         this.weight = weight;
+        this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

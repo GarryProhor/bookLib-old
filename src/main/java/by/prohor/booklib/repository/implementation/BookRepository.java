@@ -1,6 +1,5 @@
 package by.prohor.booklib.repository.implementation;
 
-import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.entity.BookEntity;
 import by.prohor.booklib.repository.interfaces.LibRepository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -34,6 +33,15 @@ public class BookRepository implements LibRepository<BookEntity> {
     public BookEntity findById(Long id) {
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM book WHERE id = ?", new BeanPropertyRowMapper<>(BookEntity.class), id);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<BookEntity> findByName(String author) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM book WHERE author = ?", new BeanPropertyRowMapper<>(BookEntity.class), author);
         }catch (Exception e){
             return null;
         }

@@ -26,7 +26,7 @@ public class BookDeserializer extends StdDeserializer<Book> {
         JsonNode node = p.getCodec().readTree(p);
 
         String isbn = node.get("isbn").asText();
-        String name = node.get("name").asText();
+        String name = node.get("title").asText();
         String author = node.get("author").asText();
         int page = node.get("page").asInt();
         double weight = node.get("weight").asDouble();
