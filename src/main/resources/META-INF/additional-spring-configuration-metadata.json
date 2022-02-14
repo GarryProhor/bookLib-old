@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "open-library.settings.base-url",
+      "type": "java.lang.String",
+      "description": "Description for open-library.settings.base-url."
+    },
+    {
+      "name": "openlibrary.settings.base-url",
+      "type": "java.lang.String",
+      "description": "Description for openlibrary.settings.base-url."
+    },
+    {
+      "name": "openlibrary.settings.limit-record",
+      "type": "java.lang.String",
+      "description": "Description for openlibrary.settings.limit-record."
+    }
+  ] }

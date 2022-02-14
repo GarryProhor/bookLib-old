@@ -2,9 +2,11 @@ package by.prohor.booklib.controller;
 
 
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.services.OpenLibraryService;
 import by.prohor.booklib.services.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+//import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiResponses;
+//import io.swagger.annotations.ApiResponse;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,26 +19,30 @@ import javax.validation.Valid;
 @RequestMapping("api")
 public class BookController {
 
-    @Autowired
-    private BookService bookService;
+    private final BookService bookService;
 
-    @Autowired
-    private OpenLibraryService openLibraryService;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
+//    @ApiOperation(value = "Get a books", notes = "Returns a books")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Successfully retrieved"),
+//            @ApiResponse(code = 404, message = "Not found - Books was not found")
+//    })
     @GetMapping
     public ResponseEntity<Object> getAllBooks(){
         return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
     }
 
+//    @ApiOperation(value = "Get a book by id", notes = "Returns a book as per the id")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Successfully retrieved"),
+//            @ApiResponse(code = 404, message = "Not found - The book was not found")
+//    })
     @GetMapping("{id}")
     public ResponseEntity<Object> getBookById(@PathVariable("id") Long id){
             return new ResponseEntity<>(bookService.findByIdBook(id), HttpStatus.OK);
-    }
-
-    @GetMapping("name/{author}")
-    public ResponseEntity<Object> getBookByAuthorName(@PathVariable("author") String author){
-      return new ResponseEntity<>(openLibraryService.findBooksByAuthor(author), HttpStatus.OK);
-
     }
 
     @PostMapping("")
