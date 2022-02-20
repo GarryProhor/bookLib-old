@@ -14,6 +14,4 @@ import javax.validation.constraints.NotBlank;
 public class OpenLibraryConfig {
     @NotBlank
     private String baseUrl;
-    @NotBlank
-    private String limitRecord;
 }

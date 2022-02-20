@@ -16,7 +16,6 @@ public class BookFromOpenLibrary {
 
             bookEntity.setName(title);
 
-
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

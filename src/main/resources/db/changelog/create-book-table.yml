@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create
+      author: GarryProhor
+      changes:
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement:  true
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+              - column:
+                  name: isbn
+                  type: varchar(255)
+                  constraints:
+                    nullable:  false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable:  false
+              - column:
+                  name: author
+                  type: varchar(255)
+                  constraints:
+                    nullable:  false
+              - column:
+                  name: page
+                  type: integer
+                  constraints:
+                    nullable:  false
+              - column:
+                  name: weight
+                  type: double
+                  constraints:
+                    nullable:  false
+              - column:
+                  name: price
+                  type: decimal
+                  constraints:
+                    nullable:  false
+              - column:
+                  name: deleted
+                  type: integer
+                  constraints:
+                    nullable:  true
+

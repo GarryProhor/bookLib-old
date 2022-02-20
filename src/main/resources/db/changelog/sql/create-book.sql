@@ -1,10 +1,10 @@
 CREATE TABLE book(
-                     id int auto_increment,
+                     id int8,
                      isbn varchar(255) not null,
                      name varchar(255) not null,
                      author varchar(255) not null,
-                     page int,
-                     weight double,
-                     price decimal,
+                     page int8 not null,
+                     weight double precision not null,
+                     price decimal not null,
                      PRIMARY KEY(id)
 );
