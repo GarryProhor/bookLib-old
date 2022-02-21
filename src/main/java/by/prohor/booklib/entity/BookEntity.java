@@ -1,21 +1,18 @@
 package by.prohor.booklib.entity;
 
 import by.prohor.booklib.util.BookDeserializer;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.function.Function;
 
-@Getter
-@Setter
-@JsonDeserialize(using = BookDeserializer.class)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Book {
+
+public class BookEntity {
+
     @NotNull
     private int id;
 
@@ -41,10 +38,7 @@ public class Book {
     @Digits(integer = 4, fraction = 2)
     private BigDecimal price;
 
-    public Book() {
-    }
-
-    public Book(int id, String isbn, String name, String author, int page, double weight, double price) {
+    public BookEntity(int id, String isbn, String name, String author, int page, double weight, double price) {
         this.id = id;
         this.isbn = isbn;
         this.name = name;
@@ -53,7 +47,7 @@ public class Book {
         this.weight = weight;
         this.price = BigDecimal.valueOf(price);
     }
-    public Book(String isbn, String name, String author, int page, double weight, double price) {
+    public BookEntity( String isbn, String name, String author, int page, double weight, double price) {
 
         this.isbn = isbn;
         this.name = name;
@@ -63,7 +57,11 @@ public class Book {
         this.price = BigDecimal.valueOf(price);
     }
 
-    public Book(String isbn, String name, String author, int page, double weight, BigDecimal price) {
+    public BookEntity() {
+
+    }
+
+    public BookEntity(String isbn, String name, String author, int page, double weight, BigDecimal price) {
         this.isbn = isbn;
         this.name = name;
         this.author = author;
