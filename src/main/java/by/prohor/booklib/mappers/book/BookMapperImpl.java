@@ -2,7 +2,7 @@ package by.prohor.booklib.mappers.book;
 
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.entity.BookEntity;
-import by.prohor.booklib.entity.BookOpenLibrary;
+import by.prohor.booklib.external.openlibrary.model.BookOpenLibrary;
 import org.springframework.stereotype.Component;
 
 @Component

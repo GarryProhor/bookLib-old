@@ -2,8 +2,8 @@ package by.prohor.booklib.services;
 
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.entity.BookEntity;
-import by.prohor.booklib.entity.BookOpenLibrary;
-import by.prohor.booklib.external.service.OpenLibraryService;
+import by.prohor.booklib.external.openlibrary.model.BookOpenLibrary;
+import by.prohor.booklib.external.openlibrary.service.OpenLibraryService;
 import by.prohor.booklib.mappers.book.BookMapperImpl;
 import by.prohor.booklib.repository.implementation.BookRepository;
 import lombok.RequiredArgsConstructor;

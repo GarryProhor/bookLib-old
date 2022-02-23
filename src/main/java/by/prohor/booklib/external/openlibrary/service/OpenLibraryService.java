@@ -1,12 +1,11 @@
-package by.prohor.booklib.external.service;
+package by.prohor.booklib.external.openlibrary.service;
 
 import by.prohor.booklib.entity.BookEntity;
-import by.prohor.booklib.entity.BookOpenLibrary;
-import by.prohor.booklib.external.util.BookFromOpenLibrary;
-import by.prohor.booklib.external.util.IsbnFromOpenLibrary;
-import by.prohor.booklib.external.util.OpenLibraryURL;
+import by.prohor.booklib.external.openlibrary.model.BookOpenLibrary;
+import by.prohor.booklib.external.openlibrary.util.BookFromOpenLibrary;
+import by.prohor.booklib.external.openlibrary.util.IsbnFromOpenLibrary;
+import by.prohor.booklib.external.openlibrary.util.OpenLibraryURL;
 import by.prohor.booklib.mappers.book.BookMapperImpl;
-import by.prohor.booklib.services.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;

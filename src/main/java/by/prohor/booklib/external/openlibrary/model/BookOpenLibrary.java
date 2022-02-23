@@ -1,4 +1,4 @@
-package by.prohor.booklib.entity;
+package by.prohor.booklib.external.openlibrary.model;
 
 
 

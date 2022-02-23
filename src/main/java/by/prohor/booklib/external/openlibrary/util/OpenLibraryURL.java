@@ -1,4 +1,4 @@
-package by.prohor.booklib.external.util;
+package by.prohor.booklib.external.openlibrary.util;
 
 public abstract class OpenLibraryURL {
 

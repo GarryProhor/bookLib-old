@@ -48,6 +48,12 @@ public class BookRepository implements LibRepository<BookEntity> {
     }
 
     @Override
+    public List<BookEntity> findByBooks(BookEntity book) {
+        return jdbcTemplate.query("SELECT * FROM book WHERE", new BeanPropertyRowMapper<>(BookEntity.class),
+                new Object[]{book.getId(), book.getIsbn(), book.getName(), book.getAuthor(), book.getPage(), book.getWeight(), book.getPrice()});
+    }
+
+    @Override
     public int deleteById(Long id) {
         return jdbcTemplate.update("DELETE FROM book WHERE id = ?", id);
     }
@@ -61,4 +67,5 @@ public class BookRepository implements LibRepository<BookEntity> {
     public int deleteAll() {
         return jdbcTemplate.update("DELETE FROM book");
     }
+
 }

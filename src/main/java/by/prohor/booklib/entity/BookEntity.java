@@ -1,14 +1,7 @@
 package by.prohor.booklib.entity;
 
-import by.prohor.booklib.util.BookDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.util.function.Function;
 
 
 public class BookEntity {
@@ -118,7 +111,7 @@ public class BookEntity {
         this.weight = weight;
     }
 
-    public BigDecimal getPrice() {
+    public @Positive @Digits(integer = 4, fraction = 2) BigDecimal getPrice() {
         return price;
     }
 

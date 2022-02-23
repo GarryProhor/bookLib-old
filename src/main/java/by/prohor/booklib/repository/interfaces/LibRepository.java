@@ -7,6 +7,7 @@ public interface LibRepository<K> {
     int update(K k);
     K findById(Long id);
     List<K> findByName(String author);
+    List<K> findByBooks(K k);
     int deleteById(Long id);
     List<K> findAll();
     int deleteAll();

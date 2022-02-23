@@ -1,4 +1,4 @@
-package by.prohor.booklib.external.util;
+package by.prohor.booklib.external.openlibrary.util;
 
 import by.prohor.booklib.entity.BookEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
