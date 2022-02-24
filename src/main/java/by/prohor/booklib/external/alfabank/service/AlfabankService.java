@@ -6,10 +6,9 @@ import by.prohor.booklib.entity.BookEntity;
 import by.prohor.booklib.external.alfabank.model.BookCurrency;
 import by.prohor.booklib.external.alfabank.model.RateListResponse;
 import by.prohor.booklib.external.alfabank.util.AlfabankURL;
-import by.prohor.booklib.mappers.book.BookMapperImpl;
 import by.prohor.booklib.repository.interfaces.LibRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,11 +22,18 @@ import java.util.Map;
 
 
 @Service
-@RequiredArgsConstructor
+
 public class AlfabankService extends AlfabankURL {
+
 
     private final LibRepository libRepository;
     private final RestTemplate restTemplate;
+
+    @Autowired
+    public AlfabankService(LibRepository libRepository, RestTemplateBuilder builder) {
+        this.libRepository = libRepository;
+        this.restTemplate = builder.build();
+    }
 
 
     public List<BookCurrency> getBook(String title) {
