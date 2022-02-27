@@ -8,6 +8,8 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
@@ -28,3 +30,4 @@ public class ClientHttpRequestInterceptor implements org.springframework.http.cl
         LOGGER.info("Request URI: {}", request.getURI());
     }
 }
+
