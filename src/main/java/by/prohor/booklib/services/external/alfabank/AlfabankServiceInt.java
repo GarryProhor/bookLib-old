@@ -13,5 +13,4 @@ public interface AlfabankServiceInt {
 
     List<BookCurrency> getBook(String title);
 
-    List<BookCurrency> booksListToCurrency(List<BookEntity> bookEntityList, RateListResponse rateListResponse);
 }

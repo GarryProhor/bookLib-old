@@ -6,6 +6,7 @@ import by.prohor.booklib.entity.BookEntity;
 import by.prohor.booklib.external.alfabank.model.BookCurrency;
 import by.prohor.booklib.external.alfabank.model.RateListResponse;
 import by.prohor.booklib.external.alfabank.util.AlfabankURL;
+import by.prohor.booklib.repository.BookRepository;
 import by.prohor.booklib.services.dao.LibRepository;
 import by.prohor.booklib.services.external.alfabank.AlfabankServiceInt;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AlfabankServiceIntImpl extends AlfabankURL implements AlfabankServiceInt {
 
-    private final LibRepository libRepository;
+    private final BookRepository libRepository;
     private final RestTemplate restTemplate;
 
 
@@ -33,13 +34,13 @@ public class AlfabankServiceIntImpl extends AlfabankURL implements AlfabankServi
     public List<BookCurrency> getBook(String title) {
 
         RateListResponse rateList = restTemplate.getForEntity(URL, RateListResponse.class).getBody();
-        Book book = new Book();
+        BookEntity book = new BookEntity();
         book.setName(title);
         return booksListToCurrency(libRepository.findByBooks(book), rateList);
     }
 
-    @Override
-    public List<BookCurrency> booksListToCurrency(List<BookEntity> bookEntityList, RateListResponse rateListResponse){
+
+    private List<BookCurrency> booksListToCurrency(List<BookEntity> bookEntityList, RateListResponse rateListResponse){
         List<BookCurrency> bookCurrencies = new ArrayList<>();
         for (BookEntity book:bookEntityList) {
             Map<String, BigDecimal> priceMap = new HashMap<>();
