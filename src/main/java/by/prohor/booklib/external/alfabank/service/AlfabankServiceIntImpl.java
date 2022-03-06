@@ -6,10 +6,9 @@ import by.prohor.booklib.entity.BookEntity;
 import by.prohor.booklib.external.alfabank.model.BookCurrency;
 import by.prohor.booklib.external.alfabank.model.RateListResponse;
 import by.prohor.booklib.external.alfabank.util.AlfabankURL;
-import by.prohor.booklib.mappers.book.BookMapperImpl;
-import by.prohor.booklib.repository.interfaces.LibRepository;
+import by.prohor.booklib.services.dao.LibRepository;
+import by.prohor.booklib.services.external.alfabank.AlfabankServiceInt;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,12 +23,13 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class AlfabankService extends AlfabankURL {
+public class AlfabankServiceIntImpl extends AlfabankURL implements AlfabankServiceInt {
 
     private final LibRepository libRepository;
     private final RestTemplate restTemplate;
 
 
+    @Override
     public List<BookCurrency> getBook(String title) {
 
         RateListResponse rateList = restTemplate.getForEntity(URL, RateListResponse.class).getBody();
@@ -38,11 +38,11 @@ public class AlfabankService extends AlfabankURL {
         return booksListToCurrency(libRepository.findByBooks(book), rateList);
     }
 
-    private List<BookCurrency> booksListToCurrency(List<BookEntity> bookEntityList, RateListResponse rateListResponse){
+    @Override
+    public List<BookCurrency> booksListToCurrency(List<BookEntity> bookEntityList, RateListResponse rateListResponse){
         List<BookCurrency> bookCurrencies = new ArrayList<>();
         for (BookEntity book:bookEntityList) {
-
-            Map<String, BigDecimal> priceMap = new HashMap<String, BigDecimal>();
+            Map<String, BigDecimal> priceMap = new HashMap<>();
             @Positive @Digits(integer = 4, fraction = 2) BigDecimal byn = book.getPrice();
             priceMap.put("BYN", byn);
             priceMap.putAll(rateListResponse.toCurrency(book.getPrice()));

@@ -2,9 +2,8 @@ package by.prohor.booklib.controller;
 
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.entity.BookEntity;
-import by.prohor.booklib.mappers.book.BookMapper;
 import by.prohor.booklib.mappers.book.BookMapperImpl;
-import by.prohor.booklib.services.BookService;
+import by.prohor.booklib.services.BookServiceImpl;
 import by.prohor.booklib.stub.BookStub;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 public class BookControllerTest {
 
     @Mock
-    BookService bookService;
+    BookServiceImpl bookServiceImpl;
 
     @InjectMocks
     private BookController bookController;
@@ -41,7 +40,7 @@ public class BookControllerTest {
     public void test_getAllBooks(){
         ArrayList<Book> bookList = new ArrayList<>();
         bookList.add(mapper.bookEntityToBook(BookStub.buildBook()));
-        Mockito.when(bookService.findAllBooks()).thenReturn(bookList);
+        Mockito.when(bookServiceImpl.findAllBooks()).thenReturn(bookList);
         ResponseEntity<Object> res = bookController.getAllBooks();
         assertEquals(HttpStatus.OK, res.getStatusCode());
     }
@@ -53,7 +52,7 @@ public class BookControllerTest {
         ArrayList<Book> bookList = new ArrayList<>();
         bookList.add(mapper.bookEntityToBook(BookStub.buildBook()));
         int countId = 1;
-        Mockito.when(bookService.findByIdBook((long) countId)).thenReturn(mapper.bookEntityToBook(BookStub.buildBook()));
+        Mockito.when(bookServiceImpl.findByIdBook((long) countId)).thenReturn(mapper.bookEntityToBook(BookStub.buildBook()));
         ResponseEntity<Object> res = bookController.getBookById((long) countId);
         assertEquals(HttpStatus.OK, res.getStatusCode());    }
 
@@ -62,7 +61,7 @@ public class BookControllerTest {
 
     public void test_createBook(){
         Book book = BookStub.buildBookDTO();
-        Mockito.when(bookService.saveBook(book)).thenReturn(book);
+        Mockito.when(bookServiceImpl.saveBook(book)).thenReturn(book);
         ResponseEntity<Object> res = bookController.createBook(book);
         assertEquals(HttpStatus.CREATED, res.getStatusCode());
     }
@@ -70,7 +69,7 @@ public class BookControllerTest {
     @Order(4)
     public void test_updateBook(){
         Book book = BookStub.buildBookDTO();
-        Mockito.when(bookService.updateBook(book)).thenReturn(mapper.bookToBookEntity(book));
+        Mockito.when(bookServiceImpl.updateBook(book)).thenReturn(mapper.bookToBookEntity(book));
 //        ResponseEntity<Object> res = bookController.updateBook((long) book.getId(), book);
 //        assertEquals(HttpStatus.OK, res.getStatusCode());
     }

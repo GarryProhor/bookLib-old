@@ -3,10 +3,9 @@ package by.prohor.booklib.service;
 
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.entity.BookEntity;
-import by.prohor.booklib.mappers.book.BookMapper;
 import by.prohor.booklib.mappers.book.BookMapperImpl;
-import by.prohor.booklib.repository.implementation.BookRepository;
-import by.prohor.booklib.services.BookService;
+import by.prohor.booklib.repository.BookRepository;
+import by.prohor.booklib.services.BookServiceImpl;
 import by.prohor.booklib.stub.BookStub;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
@@ -33,7 +31,7 @@ public class BookServiceTest {
     BookRepository bookRepository;
 
     @InjectMocks
-    BookService bookService;
+    BookServiceImpl bookServiceImpl;
 
     @InjectMocks
     private BookMapperImpl mapper;
@@ -44,7 +42,7 @@ public class BookServiceTest {
         List<BookEntity> books = new ArrayList<>();
         books.add(BookStub.buildBook());
         when(bookRepository.findAll()).thenReturn(books);
-        assertEquals(1, bookService.findAllBooks().size());
+        assertEquals(1, bookServiceImpl.findAllBooks().size());
     }
 
     @Test
@@ -55,7 +53,7 @@ public class BookServiceTest {
         int bookId=1;
 
         when(bookRepository.findById((long) bookId)).thenReturn(BookStub.buildBook());
-        assertEquals(bookId, bookService.findByIdBook((long) bookId).getId());
+        assertEquals(bookId, bookServiceImpl.findByIdBook((long) bookId).getId());
     }
 
     @Test
@@ -70,14 +68,14 @@ public class BookServiceTest {
     public void test_updateBook(){
         BookEntity book = BookStub.buildBook();
         when(bookRepository.update(book)).thenReturn(book.getId());
-        assertEquals(book, bookService.updateBook(mapper.bookEntityToBook(book)));
+        assertEquals(book, bookServiceImpl.updateBook(mapper.bookEntityToBook(book)));
     }
 
     @Test
     @Order(5)
     public void test_deleteBook(){
         Book book = BookStub.buildBookDTO();
-        bookService.deleteBook((long) book.getId());
+        bookServiceImpl.deleteBook((long) book.getId());
       //  verify(bookRepository.deleteById((long) book.getId()), times(1));
     }
 
