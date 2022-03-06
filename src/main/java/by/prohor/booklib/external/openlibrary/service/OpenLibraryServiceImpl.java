@@ -6,6 +6,7 @@ import by.prohor.booklib.external.openlibrary.util.BookFromOpenLibrary;
 import by.prohor.booklib.external.openlibrary.util.IsbnFromOpenLibrary;
 import by.prohor.booklib.external.openlibrary.util.OpenLibraryURL;
 import by.prohor.booklib.mappers.book.BookMapperImpl;
+import by.prohor.booklib.services.external.openlibrary.OpenLibraryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -20,14 +21,16 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class OpenLibraryService extends OpenLibraryURL{
+public class OpenLibraryServiceImpl extends OpenLibraryURL implements OpenLibraryService {
 
     private final RestTemplate restTemplate;
     @Autowired
-    public OpenLibraryService(RestTemplateBuilder builder) {
+
+    public OpenLibraryServiceImpl(RestTemplateBuilder builder) {
         this.restTemplate = builder.build();
     }
 
+    @Override
     public List<BookOpenLibrary> findBooksByAuthor(String author) {
 
         List<BookOpenLibrary> bookList = new ArrayList<>();
