@@ -42,8 +42,7 @@ public class AlfabankServiceImpl extends AlfabankURL implements AlfabankService 
     public List<BookCurrency> booksListToCurrency(List<BookEntity> bookEntityList, RateListResponse rateListResponse){
         List<BookCurrency> bookCurrencies = new ArrayList<>();
         for (BookEntity book:bookEntityList) {
-
-            Map<String, BigDecimal> priceMap = new HashMap<String, BigDecimal>();
+            Map<String, BigDecimal> priceMap = new HashMap<>();
             @Positive @Digits(integer = 4, fraction = 2) BigDecimal byn = book.getPrice();
             priceMap.put("BYN", byn);
             priceMap.putAll(rateListResponse.toCurrency(book.getPrice()));
