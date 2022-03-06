@@ -1,7 +1,7 @@
-package by.prohor.booklib.repository.implementation;
+package by.prohor.booklib.repository;
 
 import by.prohor.booklib.entity.BookEntity;
-import by.prohor.booklib.repository.interfaces.LibRepository;
+import by.prohor.booklib.services.dao.LibRepository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package by.prohor.booklib.repository.interfaces;
+package by.prohor.booklib.services.dao;
 
 import java.util.List;
 

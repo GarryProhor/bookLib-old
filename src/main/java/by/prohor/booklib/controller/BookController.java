@@ -2,7 +2,7 @@ package by.prohor.booklib.controller;
 
 
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.services.BookService;
+import by.prohor.booklib.services.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,37 +16,37 @@ import javax.validation.Valid;
 @RequestMapping("api")
 public class BookController {
 
-    private final BookService bookService;
+    private final BookServiceImpl bookServiceImpl;
 
     @Autowired
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookController(BookServiceImpl bookServiceImpl) {
+        this.bookServiceImpl = bookServiceImpl;
     }
 
     @GetMapping
     public ResponseEntity<Object> getAllBooks(){
-        return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
+        return new ResponseEntity<>(bookServiceImpl.findAllBooks(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Object> getBookById(@PathVariable("id") Long id){
-            return new ResponseEntity<>(bookService.findByIdBook(id), HttpStatus.OK);
+            return new ResponseEntity<>(bookServiceImpl.findByIdBook(id), HttpStatus.OK);
     }
 
     @GetMapping("name/{author}")
     public ResponseEntity<Object> getBookByAuthorName(@PathVariable("author") String author){
-        return new ResponseEntity<>(bookService.findByAuthorName(author), HttpStatus.OK);
+        return new ResponseEntity<>(bookServiceImpl.findByAuthorName(author), HttpStatus.OK);
     }
 
     @PostMapping("")
     public ResponseEntity<Object> createBook(@Valid @RequestBody Book b){
-        return new ResponseEntity<>(bookService.saveBook(new Book(b.getIsbn(), b.getName(),
+        return new ResponseEntity<>(bookServiceImpl.saveBook(new Book(b.getIsbn(), b.getName(),
                 b.getAuthor(), b.getPage(), b.getWeight(), b.getPrice())), HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<Object> updateBook(@PathVariable("id") Long id, @Valid @RequestBody Book b){
-        Book book = bookService.findByIdBook(id);
+        Book book = bookServiceImpl.findByIdBook(id);
 
         if(book != null){
             book.setId(Math.toIntExact(id));
@@ -57,7 +57,7 @@ public class BookController {
             book.setWeight(b.getWeight());
             book.setPrice(b.getPrice());
 
-            return new ResponseEntity<>(bookService.updateBook(book), HttpStatus.OK);
+            return new ResponseEntity<>(bookServiceImpl.updateBook(book), HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -65,13 +65,13 @@ public class BookController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteBookById(@PathVariable("id") Long id){
-        bookService.deleteBook(id);
+        bookServiceImpl.deleteBook(id);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteAllBook(){
-        bookService.deleteAllBooks();
+        bookServiceImpl.deleteAllBooks();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
