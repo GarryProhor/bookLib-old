@@ -9,7 +9,7 @@ import java.util.List;
 /**
  *  interface Alfabank service.
  */
-public interface AlfabankService {
+public interface AlfabankServiceInt {
 
     List<BookCurrency> getBook(String title);
 

@@ -7,7 +7,7 @@ import by.prohor.booklib.external.alfabank.model.BookCurrency;
 import by.prohor.booklib.external.alfabank.model.RateListResponse;
 import by.prohor.booklib.external.alfabank.util.AlfabankURL;
 import by.prohor.booklib.services.dao.LibRepository;
-import by.prohor.booklib.services.external.alfabank.AlfabankService;
+import by.prohor.booklib.services.external.alfabank.AlfabankServiceInt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class AlfabankServiceImpl extends AlfabankURL implements AlfabankService {
+public class AlfabankServiceIntImpl extends AlfabankURL implements AlfabankServiceInt {
 
     private final LibRepository libRepository;
     private final RestTemplate restTemplate;
