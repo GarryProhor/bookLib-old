@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Validated
 @RestController
-@RequestMapping("api")
+@RequestMapping("v1/api")
 public class BookController {
 
     private final BookServiceImpl bookServiceImpl;

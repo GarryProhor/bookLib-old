@@ -2,6 +2,7 @@ package by.prohor.booklib.entity;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.function.Function;
 
 
 public class BookEntity {

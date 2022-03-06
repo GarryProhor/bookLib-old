@@ -14,5 +14,10 @@
       "name": "openlibrary.settings.limit-record",
       "type": "java.lang.String",
       "description": "Description for openlibrary.settings.limit-record."
+    },
+    {
+      "name": "enable.kafkaListener",
+      "type": "java.lang.String",
+      "description": "Description for enable.kafkaListener."
     }
   ] }
