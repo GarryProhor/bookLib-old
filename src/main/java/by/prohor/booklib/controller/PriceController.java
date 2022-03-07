@@ -10,11 +10,11 @@ import java.util.List;
 
 @RestController
 public class PriceController {
-
-    @Autowired
-    AlfabankServiceIntImpl alfabankService;
-
-        public List<BookCurrency> getBooks(String title){
-        return alfabankService.getBook(title);
-    }
+//
+//    @Autowired
+//    AlfabankServiceIntImpl alfabankService;
+//
+//        public List<BookCurrency> getBooks(String title){
+//        return alfabankService.getBook(title);
+//    }
 }

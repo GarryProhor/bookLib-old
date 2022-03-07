@@ -1,4 +1,4 @@
-package by.prohor.booklib.configuration;
+package by.prohor.booklib.external.openlibrary.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,6 +12,5 @@ import javax.validation.constraints.NotBlank;
 @Configuration
 @ConfigurationProperties(prefix = "openlibrary.settings")
 public class OpenLibraryConfig {
-    @NotBlank
     private String baseUrl;
 }

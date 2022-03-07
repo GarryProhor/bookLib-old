@@ -1,4 +1,4 @@
-package by.prohor.booklib.services.external.openlibrary;
+package by.prohor.booklib.service.external.openlibrary;
 
 import by.prohor.booklib.external.openlibrary.model.BookOpenLibrary;
 

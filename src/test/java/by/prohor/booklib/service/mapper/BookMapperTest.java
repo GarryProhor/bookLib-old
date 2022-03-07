@@ -1,9 +1,8 @@
-package by.prohor.booklib.mapper;
+package by.prohor.booklib.service.mapper;
 
 
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.entity.BookEntity;
-import by.prohor.booklib.mappers.book.BookMapperImpl;
+import by.prohor.booklib.service.dto.BookDTO;
 import by.prohor.booklib.stub.BookStub;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -19,21 +18,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BookMapperTest {
 
     @InjectMocks
-    private BookMapperImpl mapper;
+    private BookMapper bookMapper;
 
     @Test
     @Order(1)
     public void test_entityIntoDTO(){
-        BookEntity bookEntity = BookStub.buildBook();
-        Book book = BookStub.buildBookDTO();
-        assertEquals(book, mapper.bookEntityToBook(bookEntity));
+        Book book = BookStub.buildBook();
+        BookDTO bookDTO = BookStub.buildBookDTO();
+        assertEquals(bookDTO, bookMapper.bookToBookDTO(book));
     }
 
     @Test
     @Order(2)
     public void test_dtoIntoEntity(){
-        BookEntity bookEntity = BookStub.buildBook();
-        Book book = BookStub.buildBookDTO();
-        assertEquals(bookEntity, mapper.bookToBookEntity(book));
+        Book book = BookStub.buildBook();
+        BookDTO bookDTO = BookStub.buildBookDTO();
+        assertEquals(book, bookMapper.bookDTOtoBook(bookDTO));
     }
 }
