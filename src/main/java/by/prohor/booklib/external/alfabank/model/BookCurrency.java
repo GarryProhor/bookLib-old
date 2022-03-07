@@ -1,5 +1,5 @@
 package by.prohor.booklib.external.alfabank.model;
-import by.prohor.booklib.entity.BookEntity;
+import by.prohor.booklib.entity.Book;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +18,7 @@ public class BookCurrency {
     private double weight;
     private Map <String, BigDecimal> price;
 
-    public BookCurrency(BookEntity book, Map<String, BigDecimal> price) {
+    public BookCurrency(Book book, Map<String, BigDecimal> price) {
         this.isbn = book.getIsbn();
         this.name = book.getName();
         this.author = book.getAuthor();

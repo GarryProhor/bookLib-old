@@ -1,12 +1,12 @@
 package by.prohor.booklib.external.openlibrary.service;
 
-import by.prohor.booklib.entity.BookEntity;
+import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.external.openlibrary.model.BookOpenLibrary;
-import by.prohor.booklib.external.openlibrary.util.BookFromOpenLibrary;
 import by.prohor.booklib.external.openlibrary.util.IsbnFromOpenLibrary;
 import by.prohor.booklib.external.openlibrary.util.OpenLibraryURL;
-import by.prohor.booklib.mappers.book.BookMapperImpl;
-import by.prohor.booklib.services.external.openlibrary.OpenLibraryService;
+import by.prohor.booklib.external.openlibrary.util.BookFromOpenLibrary;
+import by.prohor.booklib.service.mapper.BookMapper;
+import by.prohor.booklib.service.external.openlibrary.OpenLibraryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -23,11 +23,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OpenLibraryServiceImpl extends OpenLibraryURL implements OpenLibraryService {
 
+    private final BookMapper bookMapper;
     private final RestTemplate restTemplate;
     @Autowired
 
-    public OpenLibraryServiceImpl(RestTemplateBuilder builder) {
+    public OpenLibraryServiceImpl(RestTemplateBuilder builder, BookMapper bookMapper) {
         this.restTemplate = builder.build();
+        this.bookMapper = bookMapper;
     }
 
     @Override
@@ -44,10 +46,10 @@ public class OpenLibraryServiceImpl extends OpenLibraryURL implements OpenLibrar
         for(String isbn : isbnList){
             response = restTemplate.exchange((URL_BASE+URL_ISBN), HttpMethod.GET, null, String.class, isbn);
 
-            BookEntity book = BookFromOpenLibrary.findBook(response.getBody(), isbn);
+            Book book = BookFromOpenLibrary.findBook(response.getBody(), isbn);
             book.setIsbn(isbn);
             book.setAuthor(author);
-            bookList.add(BookMapperImpl.bookEntityToBookOpenLibrary(book));
+            bookList.add(bookMapper.bookToBookOpenLibrary(book));
         }
         return bookList;
     }

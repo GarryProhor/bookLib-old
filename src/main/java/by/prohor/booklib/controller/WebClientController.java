@@ -1,7 +1,6 @@
 package by.prohor.booklib.controller;
 
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.entity.BookEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,7 @@ import reactor.core.publisher.Mono;
 import javax.annotation.PostConstruct;
 
 @RestController
-@RequestMapping(value = "/external", produces = "application/json")
+@RequestMapping(value = "/books", produces = "application/json")
 public class WebClientController {
     private WebClient webClient;
 
@@ -25,8 +24,8 @@ public class WebClientController {
     public Mono getById(@PathVariable("id") String id){
         return webClient
                 .get()
-                .uri("v1/api/{id}", id)
+                .uri("books/{id}", id)
                 .retrieve()
-                .bodyToMono(BookEntity.class);
+                .bodyToMono(Book.class);
     }
 }

@@ -1,16 +1,16 @@
 package by.prohor.booklib.stub;
 
 import by.prohor.booklib.entity.Book;
-import by.prohor.booklib.entity.BookEntity;
+import by.prohor.booklib.service.dto.BookDTO;
 
 import java.math.BigDecimal;
 
 
 public class BookStub {
-    public static Book buildBookDTO(){
+    public static BookDTO buildBookDTO(){
 
-        Book book = new Book();
-        book.setId(1);
+        BookDTO book = new BookDTO();
+       // book.setId(1);
         book.setIsbn("ISBN 978-1-55111-123-9");
         book.setName("Garry Potter");
         book.setAuthor("G.Rouling");
@@ -19,10 +19,10 @@ public class BookStub {
         book.setPrice(BigDecimal.valueOf(99.98));
         return book;
     }
-    public static BookEntity buildBook(){
+    public static Book buildBook(){
 
-        BookEntity book = new BookEntity();
-        book.setId(1);
+        Book book = new Book();
+       // book.setId(1);
         book.setIsbn("ISBN 978-1-55111-123-9");
         book.setName("Garry Potter");
         book.setAuthor("G.Rouling");
