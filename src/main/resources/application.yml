@@ -3,6 +3,10 @@ server:
 spring:
   liquibase:
     enabled: true
+    change-log: classpath:liquibase/db.changelog-master.xml
+    url: jdbc:postgresql://localhost:5432/books
+    password: 123
+    user: postgres
   datasource:
     url: jdbc:postgresql://localhost:5432/books
     password: 123
@@ -18,6 +22,7 @@ spring:
       idle-timeout: 300000
       # максимальное время жизни (в миллисекундах) после закрытия соединения в пуле (10 мин)
       max-lifetime: 600000
+    driver-class-name: org.postgresql.Driver
   kafka:
       bootstrap-servers: localhost:29092
       consumer:
@@ -45,6 +50,10 @@ management:
     shutdown:
       enabled: true
 
+jwt:
+  token:
+    secret: garry
+    expired: 3600000
 
 
 
