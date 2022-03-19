@@ -1,82 +1,60 @@
 package by.prohor.booklib.entity;
 
-import by.prohor.booklib.util.BookDeserializer;
+//import by.prohor.booklib.util.BookDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.validation.constraints.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-@Getter
-@Setter
-@JsonDeserialize(using = BookDeserializer.class)
+//@JsonDeserialize(using = BookDeserializer.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
+@Table(name = "book")
 public class Book {
-    @NotNull
-    private int id;
 
-    @Pattern(regexp = "[0-9]{13}")
+    @Id
+    private Long id;
+
     private String isbn;
 
-    @NotBlank(message = "should not be empty")
-    @Size(min = 2, max = 25, message = "should be between 2 and 25 characters")
     private String name;
 
-    @NotBlank(message = "should not be empty")
-    @Size(min = 2, max = 25, message = "should be between 2 and 25 characters")
     private String author;
 
-    @Min(1)
-    @Max(1000)
     private int page;
 
-    @PositiveOrZero
     private double weight;
 
-    @Positive
-    @Digits(integer = 4, fraction = 2)
     private BigDecimal price;
 
     public Book() {
     }
 
-    public Book(int id, String isbn, String name, String author, int page, double weight, double price) {
-        this.id = id;
-        this.isbn = isbn;
-        this.name = name;
-        this.author = author;
-        this.page = page;
-        this.weight = weight;
-        this.price = BigDecimal.valueOf(price);
-    }
-    public Book(String isbn, String name, String author, int page, double weight, double price) {
-
-        this.isbn = isbn;
-        this.name = name;
-        this.author = author;
-        this.page = page;
-        this.weight = weight;
-        this.price = BigDecimal.valueOf(price);
+    public Book(Long id, String isbn, String name, String author, int page, double weight, BigDecimal price) {
     }
 
-    public Book(String isbn, String name, String author, int page, double weight, BigDecimal price) {
-        this.isbn = isbn;
-        this.name = name;
-        this.author = author;
-        this.page = page;
-        this.weight = weight;
-        this.price = price;
+    public static BookBuilder builder() {
+        return new BookBuilder();
     }
 
-    public int getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -126,5 +104,61 @@ public class Book {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public static class BookBuilder {
+        private @NotNull Long id;
+        private @Pattern(regexp = "[0-9]{13}") String isbn;
+        private @NotBlank(message = "should not be empty") @Size(min = 2, max = 25, message = "should be between 2 and 25 characters") String name;
+        private @NotBlank(message = "should not be empty") @Size(min = 2, max = 25, message = "should be between 2 and 25 characters") String author;
+        private @Min(1) @Max(1000) int page;
+        private @PositiveOrZero double weight;
+        private @Positive @Digits(integer = 4, fraction = 2) BigDecimal price;
+
+        BookBuilder() {
+        }
+
+        public BookBuilder id(@NotNull Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public BookBuilder isbn(@Pattern(regexp = "[0-9]{13}") String isbn) {
+            this.isbn = isbn;
+            return this;
+        }
+
+        public BookBuilder name(@NotBlank(message = "should not be empty") @Size(min = 2, max = 25, message = "should be between 2 and 25 characters") String name) {
+            this.name = name;
+            return this;
+        }
+
+        public BookBuilder author(@NotBlank(message = "should not be empty") @Size(min = 2, max = 25, message = "should be between 2 and 25 characters") String author) {
+            this.author = author;
+            return this;
+        }
+
+        public BookBuilder page(@Min(1) @Max(1000) int page) {
+            this.page = page;
+            return this;
+        }
+
+        public BookBuilder weight(@PositiveOrZero double weight) {
+            this.weight = weight;
+            return this;
+        }
+
+        public BookBuilder price(@Positive @Digits(integer = 4, fraction = 2) BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public Book build() {
+            return new Book(id, isbn, name, author, page, weight, price);
+        }
+
+        public String toString() {
+            return "Book.BookBuilder(id=" + this.id + ", isbn=" + this.isbn + ", name=" + this.name + ", author=" + this.author + ", page=" + this.page + ", weight=" + this.weight + ", price=" + this.price + ")";
+        }
     }
 }

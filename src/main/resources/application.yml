@@ -1,6 +1,12 @@
+server:
+  port: 4000
 spring:
   liquibase:
     enabled: true
+    change-log: classpath:liquibase/db.changelog-master.xml
+    url: jdbc:postgresql://localhost:5432/books
+    password: 123
+    user: postgres
   datasource:
     url: jdbc:postgresql://localhost:5432/books
     password: 123
@@ -16,11 +22,42 @@ spring:
       idle-timeout: 300000
       # максимальное время жизни (в миллисекундах) после закрытия соединения в пуле (10 мин)
       max-lifetime: 600000
+    driver-class-name: org.postgresql.Driver
+  kafka:
+      bootstrap-servers: localhost:29092
+      consumer:
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      topics-name: audit
+      topics-partitions: 1
+      topics-replicas: 1
+      topics-group-id: book
+enable:
+  kafkaListener: true
 
 open-library:
   settings:
     base-url: https://openlibrary.org/
 
+management:
+  server:
+    port: 9001
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
 
-enable:
-  kafkaListener: true
+jwt:
+  token:
+    secret: garry
+    expired: 3600000
+
+
+
+
+
+
+

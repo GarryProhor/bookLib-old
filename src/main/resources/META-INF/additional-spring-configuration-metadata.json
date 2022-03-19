@@ -14,5 +14,15 @@
       "name": "openlibrary.settings.limit-record",
       "type": "java.lang.String",
       "description": "Description for openlibrary.settings.limit-record."
+    },
+    {
+      "name": "enable.kafkaListener",
+      "type": "java.lang.String",
+      "description": "Description for enable.kafkaListener."
+    },
+    {
+      "name": "spring.liquibase.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.liquibase.username."
     }
   ] }
