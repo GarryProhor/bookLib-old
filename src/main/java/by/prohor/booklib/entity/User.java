@@ -1,17 +1,18 @@
 package by.prohor.booklib.entity;
 
-import lombok.Data;
+
+import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Data
+@AllArgsConstructor
 public class User extends BaseEntity{
 
     @Column(name = "username")
-    private String usermane;
+    private String username;
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,4 +31,62 @@ public class User extends BaseEntity{
     joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
     inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
+
+    public User() {
+    }
+
+
+
+
+
+
+
+
+    public String getUsermane() {
+        return username;
+    }
+
+    public void setUsermane(String usermane) {
+        this.username = usermane;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }

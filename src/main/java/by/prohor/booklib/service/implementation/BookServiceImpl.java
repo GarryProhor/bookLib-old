@@ -1,6 +1,7 @@
-package by.prohor.booklib.service;
+package by.prohor.booklib.service.implementation;
 
 import by.prohor.booklib.external.openlibrary.model.BookOpenLibrary;
+import by.prohor.booklib.service.BookService;
 import by.prohor.booklib.service.dto.BookDTO;
 import by.prohor.booklib.entity.Book;
 import by.prohor.booklib.exception.NoSuchBookException;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
     private final BookRepo bookRepo;
     private final BookMapper bookMapper;
